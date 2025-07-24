@@ -11,6 +11,8 @@ import styles from "./styles.css";
 import { InsertCodeHandler } from "./types";
 
 function Plugin() {
+  const [json, setJson] = useState<string>("");
+
   function magic(): void {
     // Do stuff
   }
@@ -20,6 +22,7 @@ function Plugin() {
       <VerticalSpace space="small" />
       <Text>Ready for some action?</Text>
       <VerticalSpace space="large" />
+      <div></div>
       <Button fullWidth onClick={magic}>
         Insert Code
       </Button>

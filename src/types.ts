@@ -5,7 +5,7 @@ export interface InsertCodeHandler extends EventHandler {
   handler: (code: string) => void;
 }
 
-export interface Magic extends EventHandler {
+export interface MagicHandler extends EventHandler {
   name: "MAGIC";
   handler: () => void;
 }
