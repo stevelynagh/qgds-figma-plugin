@@ -24,7 +24,7 @@ function Plugin() {
       <VerticalSpace space="large" />
       <div></div>
       <Button fullWidth onClick={magic}>
-        Insert Code
+        Make the magic happen
       </Button>
       <VerticalSpace space="small" />
     </Container>
