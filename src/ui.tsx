@@ -13,17 +13,13 @@ import { InsertCodeHandler } from "./types";
 function Plugin() {
   const [json, setJson] = useState<string>("");
 
-  function magic(): void {
-    // Do stuff
-  }
-
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
       <Text>Ready for some action?</Text>
       <VerticalSpace space="large" />
       <div></div>
-      <Button fullWidth onClick={magic}>
+      <Button fullWidth onClick={() => emit("MAGIC")}>
         Make the magic happen
       </Button>
       <VerticalSpace space="small" />
