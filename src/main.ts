@@ -2,11 +2,16 @@ import {
   loadFontsAsync,
   once,
   on,
+  emit,
   showUI,
 } from '@create-figma-plugin/utilities';
 
-import { InsertCodeHandler, MagicHandler } from './types';
-import { processCollection } from './utils/processCollection';
+import {
+  InsertCodeHandler,
+  ProcessVariablesHandler,
+  ProcessVariablesCompleteHandler,
+} from './types';
+import { exportToJSON } from './utils/exportToJSON';
 
 export default function () {
   once<InsertCodeHandler>('INSERT_CODE', async function (code: string) {
@@ -18,19 +23,10 @@ export default function () {
     figma.closePlugin();
   });
 
-  on<MagicHandler>('MAGIC', () => {
-    // get all tokens and log them
-    console.log('woot');
-    figma.variables.getLocalVariableCollectionsAsync().then((collections) => {
-      // const files: ReturnType<typeof processCollection>[];
-      collections.forEach((collection) => {
-        processCollection(collection).then((processed) => {
-          console.log(JSON.stringify(processed));
-        });
-      });
-    });
-
-    console.log('click');
+  on<ProcessVariablesHandler>('PROCESS_VARIABLES', async () => {
+    console.clear();
+    const files = await exportToJSON();
+    emit<ProcessVariablesCompleteHandler>('PROCESS_VARIABLES_COMPLETE', files);
   });
 
   // Displays the Plugin

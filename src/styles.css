@@ -3,8 +3,10 @@
   height: 164px;
 }
 
-.editor {
-  min-height: 100%;
-  font-family: var(--font-family-code);
-  font-size: var(--font-size-12);
+.code-block {
+  display: block;
+  /* min-height: 100%; */
+  user-select: all;
+  font-family: var(--font-family-code) !important;
+  font-size: .8em !important; 
 }

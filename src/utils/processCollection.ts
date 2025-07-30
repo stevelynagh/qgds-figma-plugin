@@ -1,3 +1,5 @@
+import { TokenFile, TokenFileNode } from '../types';
+
 // Type predicate in order to narrow type for a happy Typescript
 function isVariableAlias(value: VariableValue): value is VariableAlias {
   return (
@@ -17,18 +19,13 @@ async function getVariableByIdAsync(id: string): Promise<Variable> {
   } else return variable;
 }
 
-interface RGB {
-  readonly r: number;
-  readonly g: number;
-  readonly b: number;
-  readonly a?: number;
-}
-
-function rgbToHex({ r, g, b, a }: RGB) {
-  if (a !== 1 && a !== undefined) {
+function rgbToHex(color: RGB | RGBA) {
+  const { r, g, b } = color;
+  const hasAlpha = 'a' in color && typeof color.a === 'number';
+  if (hasAlpha && color.a !== 1) {
     return `rgba(${[r, g, b]
       .map((n) => Math.round(n * 255))
-      .join(', ')}, ${a.toFixed(4)})`;
+      .join(', ')}, ${color.a.toFixed(4)})`;
   }
   const toHex = (value: number) => {
     const hex = Math.round(value * 255).toString(16);
@@ -51,13 +48,13 @@ export async function processCollection({
   }[];
   variableIds: string[];
 }) {
-  const files = [];
+  const files: TokenFile[] = [];
 
   for (const mode of modes) {
-    const file: {
-      fileName: string;
-      body: Record<string, unknown>;
-    } = { fileName: `${name}.${mode.name}.tokens.json`, body: {} };
+    const file: TokenFile = {
+      fileName: `${name}.${mode.name}.tokens.json`,
+      body: {},
+    };
 
     for (const variableId of variableIds) {
       const { name, resolvedType, valuesByMode } = await getVariableByIdAsync(
@@ -66,18 +63,22 @@ export async function processCollection({
       const value = valuesByMode[mode.modeId];
 
       if (value !== undefined && ['COLOR', 'FLOAT'].includes(resolvedType)) {
-        let obj = file.body;
+        let node: TokenFileNode = file.body;
+        // split the name into array repesenting each group level
         name.split('/').forEach((groupName) => {
-          obj[groupName] = obj[groupName] || {};
-          obj = obj[groupName] as Record<string, unknown>;
+          // look up the group object on the current node, or create it if not exists.
+          node[groupName] = node[groupName] || {};
+
+          // reassign the reference to the node one level deeper and populate it
+          node = node[groupName] as TokenFileNode;
         });
-        obj.$type = resolvedType === 'COLOR' ? 'color' : 'number';
+        node.$type = resolvedType === 'COLOR' ? 'color' : 'number';
 
         if (isVariableAlias(value)) {
           const currentVar = await getVariableByIdAsync(value.id);
-          obj.$value = `{${currentVar.name.replace(/\//g, '.')}}`;
+          node.$value = `{${currentVar.name.replace(/\//g, '.')}}`;
         } else {
-          obj.$value =
+          node.$value =
             resolvedType === 'COLOR' ? rgbToHex(value as RGB) : value;
         }
       }
