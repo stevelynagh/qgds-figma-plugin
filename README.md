@@ -1,4 +1,4 @@
-# React Editor
+# QGDS Tokenator
 
 ## Development guide
 
