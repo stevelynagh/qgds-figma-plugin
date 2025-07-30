@@ -21,14 +21,14 @@ function Plugin() {
     setJson(JSON.stringify(data, null, 4));
   });
 
-  useEffect(() => {
-    emit('PROCESS_VARIABLES');
-  });
+  // useEffect(() => {
+  //   emit('PROCESS_VARIABLES');
+  // });
 
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
-      <Text>Ready for some action?</Text>
+      <Text>Welcome to QGDS Tokenator.</Text>
 
       {json && (
         <>
@@ -38,11 +38,11 @@ function Plugin() {
               {json}
             </code>
           </div>
-          <VerticalSpace space="large" />
+          <VerticalSpace space="small" />
         </>
       )}
       <Button fullWidth onClick={() => emit('PROCESS_VARIABLES')}>
-        Convert Variables to JSON
+        Export Variables as Design Tokens
       </Button>
       <VerticalSpace space="small" />
     </Container>

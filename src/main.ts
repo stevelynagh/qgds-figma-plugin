@@ -30,5 +30,5 @@ export default function () {
   });
 
   // Displays the Plugin
-  showUI({ height: 232, width: 320 });
+  showUI({ height: 320, width: 320 });
 }
