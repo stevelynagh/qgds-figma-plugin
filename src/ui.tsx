@@ -32,6 +32,7 @@ function Plugin() {
 
       {json && (
         <>
+          <VerticalSpace space="small" />
           <div className={styles['container']}>
             <code className={`${styles['code-block']} language-json`}>
               {json}
