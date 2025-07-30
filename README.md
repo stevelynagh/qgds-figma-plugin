@@ -2,7 +2,7 @@
 
 ## Development guide
 
-*This plugin is built with [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/).*
+_This plugin is built with [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/)._
 
 ### Pre-requisites
 
@@ -36,6 +36,10 @@ $ npm run watch
 Use `console.log` statements to inspect values in your code.
 
 To open the developer console, search for and run `Show/Hide Console` via the Quick Actions search bar.
+
+### Publishing
+
+In order to publish updates to Figma you'll need to enable 2FA on your Figma account. This is done via Figma App. Home >> Account dropdown >> settings >> security and follow the instuctions.
 
 ## See also
 

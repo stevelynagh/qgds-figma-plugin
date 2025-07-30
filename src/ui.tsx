@@ -9,7 +9,7 @@ import {
 } from '@create-figma-plugin/ui';
 import { emit, on } from '@create-figma-plugin/utilities';
 import { h, Fragment } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 
 import styles from './styles.css';
 import { ProcessVariablesCompleteHandler } from './types';
@@ -29,10 +29,9 @@ function Plugin() {
     <Container space="medium">
       <VerticalSpace space="small" />
       <Text>Welcome to QGDS Tokenator.</Text>
-
+      <VerticalSpace space="small" />
       {json && (
         <>
-          <VerticalSpace space="small" />
           <div className={styles['container']}>
             <code className={`${styles['code-block']} language-json`}>
               {json}

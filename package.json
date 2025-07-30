@@ -1,4 +1,17 @@
 {
+  "name": "qgds-tokenator",
+  "description": "Integrate with QGDS Tokens repo",
+  "version": "0.1.0",
+  "keywords": [
+    "figma",
+    "design tokens",
+    "plugin"
+  ],
+  "author": "Steven Lynagh <steve.lynagh@smartservice.qld.gov.au>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevelynagh/qgds-tokenator.git"
+  },
   "dependencies": {
     "@create-figma-plugin/ui": "^4.0.1",
     "@create-figma-plugin/utilities": "^4.0.1",
@@ -24,9 +37,15 @@
     "editorType": [
       "figma"
     ],
-    "id": "qgds-tokeniser",
-    "name": "QGDS Tokeniser",
+    "id": "qgds-tokenator",
+    "name": "QGDS Tokenator",
     "main": "src/main.ts",
-    "ui": "src/ui.tsx"
+    "ui": "src/ui.tsx",
+    "networkAccess": {
+      "allowedDomains": [
+        "none"
+      ]
+    },
+    "documentAccess": "dynamic-page"
   }
 }
