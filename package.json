@@ -37,7 +37,7 @@
     "editorType": [
       "figma"
     ],
-    "id": "qgds-tokenator",
+    "id": "1532238826805204173",
     "name": "QGDS Tokenator",
     "main": "src/main.ts",
     "ui": "src/ui.tsx",
