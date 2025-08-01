@@ -35,7 +35,11 @@
   },
   "figma-plugin": {
     "editorType": [
-      "figma"
+      "figma",
+      "dev"
+    ],
+    "capabilities": [
+      "inspect"
     ],
     "id": "1532238826805204173",
     "name": "QGDS Tokenator",
